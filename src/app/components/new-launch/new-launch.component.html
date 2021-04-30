@@ -1,0 +1,70 @@
+<div class="product-body container py-2">
+    <form class="" [formGroup]="productForm"
+          (ngSubmit)="addProductFireBase()"
+           [hidden]="success">
+        <mat-card class="py-2">
+            <mat-card-header>
+                <mat-card-title>Register your Brand Product</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            <h6>Product Name</h6>
+                        </mat-label>
+                        <input matInput placeholder="Enter the product name" formControlName="name">
+                        <mat-error class="has-text-danger"
+                            *ngIf="name.invalid && name.touched && name.dirty" >
+                            Name is a required field
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            <h6>Product Price</h6>
+                        </mat-label>
+                        <input matInput placeholder="Enter the product price" formControlName="price">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            <h6>Dealer's Name</h6>
+                        </mat-label>
+                        <input matInput placeholder="Enter the Dealer's Name" formControlName="dealer">
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="fill">
+                        <mat-label>RAM variant (in GB)</mat-label>
+                        <mat-select formControlName="ramTypes">
+                            <mat-option *ngFor="let ram of rams" [value]="ram">{{ram}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            <h6>Built-In Processor</h6>
+                        </mat-label>
+                        <input matInput placeholder="Enter the Processor" formControlName="processor">
+                    </mat-form-field>
+                </p>
+                <p>
+
+
+                </p>
+
+
+            </mat-card-content>
+            <mat-card-actions class="text-center pb-4">
+
+                <button [disabled]="!productForm.valid" type="submit" mat-raised-button color="primary">Submit</button>
+                <button type="reset" mat-raised-button color="warn">Clear</button>
+
+            </mat-card-actions>
+        </mat-card>
+    </form>
+
+</div>

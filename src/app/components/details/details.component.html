@@ -1,0 +1,22 @@
+<div class="container py-4">
+    <table class="table table-bordered table-striped table-hover product-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Processor</th>
+                <th>RAM Available</th>
+                <th>Dealer's Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of productList">
+                <td>{{ item.name }}</td>
+                <td>{{ item.processor }}</td>
+                <td>{{ item.ramTypes + ' GB' }}</td>
+                <td>{{ item.dealer }}</td>
+                <td>{{'₹'+ item.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

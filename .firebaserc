@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "product-cart-firebase": {
+      "hosting": {
+        "product-cart-firebase": [
+          "product-cart-firebase"
+        ]
+      }
+    }
+  }
+}
