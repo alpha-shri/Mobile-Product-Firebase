@@ -12,12 +12,21 @@ export class ProductService {
 
   constructor(private http: HttpClient, private fireStore: AngularFirestore) {}
 
-  addNewProductService(item: Product): Observable<Product[]> {
+  addNewProductService(item: Product, file:File): Observable<Product[]> {
+
+    // Create form data
+    const formData = new FormData(); 
+        
+    // Store form name as "file" with file data
+    formData.append("file", file, file.name);
+    
 
     this.inventory.push(item);
-    const addedItem = this.fireStore.collection('product').add(item);
-    console.table(addedItem);
 
     return of<Product[]>(this.inventory);
   }
+
+  getAllProductsService(): Observable<Product[]>{
+    return of(this.inventory);   
+}
 }

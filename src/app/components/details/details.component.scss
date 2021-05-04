@@ -1,6 +1,18 @@
-.product-table{
-    thead{
-        background-color: #417e9a;
-        color: #fff;
-    }
+$COLOR: red;
+
+.product-table {
+  thead {
+    background-color: $COLOR;
+    color: #fff;
+  }
+}
+
+.delete-icon {
+  cursor: pointer;
+  color: $COLOR;
+}
+
+.edit-icon {
+  cursor: pointer;
+  color: blueviolet;
 }

@@ -1,0 +1,61 @@
+<form [formGroup]="productForm">
+    <h1 mat-dialog-title>Update Mobile Details: {{ data.name }}</h1>
+    <div mat-dialog-content>
+        <mat-card-content>
+            <div class="row">
+                <p class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            <h6>Product Name</h6>
+                        </mat-label>
+                        <input matInput placeholder="Enter the product name"
+                         formControlName="name" />
+                        <mat-error class="has-text-danger" *ngIf="name.invalid && name.touched && name.dirty">
+                            Name is a required field
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            <h6>Product Price</h6>
+                        </mat-label>
+                        <input matInput placeholder="Enter the product price" formControlName="price" />
+                    </mat-form-field>
+                </p>
+            </div>
+            <div class="row">
+                <p class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            <h6>Dealer's Name</h6>
+                        </mat-label>
+                        <input matInput placeholder="Enter the Dealer's Name" formControlName="dealer" />
+                    </mat-form-field>
+                </p>
+                <p class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            <h6>Built-In Processor</h6>
+                        </mat-label>
+                        <input matInput placeholder="Enter the Processor" formControlName="processor" />
+                    </mat-form-field>
+                </p>
+            </div>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>RAM variant (in GB)</mat-label>
+                    <mat-select formControlName="ramTypes">
+                        <mat-option *ngFor="let ram of rams" [value]="ram">{{
+                            ram
+                            }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>
+        </mat-card-content>
+    </div>
+    <div mat-dialog-actions class="text-center">
+        <button mat-raised-button color="accent" (click)=updateProduct()>Update</button>
+        <button mat-raised-button color="warn" (click)="closeButton()">Close</button>
+    </div>
+</form>

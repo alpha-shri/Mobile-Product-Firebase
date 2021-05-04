@@ -1,5 +1,5 @@
-<div class="container py-4">
-    <table class="table table-bordered table-striped table-hover product-table">
+<div class="container py-4 ">
+    <table class="table table-bordered table-striped table-hover product-table rounded shadow">
         <thead>
             <tr>
                 <th>Name</th>
@@ -7,6 +7,7 @@
                 <th>RAM Available</th>
                 <th>Dealer's Name</th>
                 <th>Price</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +17,10 @@
                 <td>{{ item.ramTypes + ' GB' }}</td>
                 <td>{{ item.dealer }}</td>
                 <td>{{'₹'+ item.price }}</td>
+                <td>
+                    <mat-icon class="edit-icon mx-2" title="Update" (click)="editDialog(item)">edit</mat-icon>
+                    <mat-icon (click)="deleteItem(item.id)" class="delete-icon" title="Delete">delete_forever</mat-icon>
+                </td>
             </tr>
         </tbody>
     </table>

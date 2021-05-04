@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row container">
+        <p class="col-md-6">
+            <mat-form-field appearance="fill">
+                <mat-label>Choose A Mobile</mat-label>
+                <mat-select (selectionChange)="getMobileDetails($event)">
+                    <mat-option *ngFor="let mobile of availableMobiles" [value]="mobile.id"             #mobileDetails>
+                        {{mobile.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <p class="col-md-6" *ngIf="cartItems.length > 0">
+            <button mat-raised-button color="warn" class="btn-right" (click)="checkOutBasket()">
+                <mat-icon>shopping_basket</mat-icon>
+                Checkout Bag
+            </button>
+        </p>
+    </div>
+
+    <div class="mobile-details" *ngIf="changed">
+        <mat-card class="py-2">
+            <mat-card-content>
+                <span>
+                    <h4>Mobile Name: {{ mobileDetails.name }}</h4>
+                </span>
+                <span>
+                    <h4>Dealer: {{ mobileDetails.dealer }}</h4>
+                </span>
+                <span>
+                    <h4>Processor: {{ mobileDetails.processor }}</h4>
+                </span>
+                <h4>RAM: {{ mobileDetails.ramTypes }}</h4>
+                <span>
+                    <h4>Price: {{ mobileDetails.price }}</h4>
+                </span>
+            </mat-card-content>
+            <mat-card-actions class="text-center pb-4">
+                <button type="submit"
+                        mat-raised-button color="primary"
+                        (click)="goToCart(mobileDetails)">
+                    Add to cart<mat-icon class="ml-2">add_shopping_cart</mat-icon>
+                </button>
+                <button type="submit"
+                        mat-raised-button color="accent"
+                        (click)="clearCart()">
+                    Clear cart<mat-icon class="ml-2">clear</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

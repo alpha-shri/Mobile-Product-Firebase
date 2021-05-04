@@ -1,0 +1,16 @@
+$COLOR: rgb(91, 174, 241);
+
+.mat-button {
+  height: 50px;
+  width: 400px;
+}
+.mat-button-active {
+  color: #ffffff;
+  font-weight: bold;
+  background-color: $COLOR;
+  border-color: $COLOR $COLOR #fff;
+}
+
+.mat-toolbar {
+  background-color: #ffffff;
+}

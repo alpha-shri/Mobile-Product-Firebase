@@ -1,0 +1,38 @@
+<div class="container">
+        <b>
+            <h3 class="text-center">Your Basket</h3>
+            <div class="row" *ngFor="let mobile of addItemList">
+                <p class="col-md-5">
+                    {{ mobile.name }}
+                </p>
+                <p class="col-md-3">
+                    <mat-form-field style="width: 50%;" appearance="fill">
+                        <mat-label>Qty</mat-label>
+                        <mat-select #temp (selectionChange)="calcPrice($event.value, mobile)">
+                            <mat-option *ngFor="let q of qty" [value]="q">
+                                {{q}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <p class="col-md-3">
+                     <span *ngIf="temp.value > 0">
+                        Price: {{ mobile.price * temp.value }}
+                     </span>
+                </p>
+            </div>
+            
+        </b>
+        <div class="button-area row" style="bottom: 0;">
+            <span class="col-md-9">
+                <b *ngIf="fetchBillFlag">Total Bill: {{ amount }}</b>
+                <div class="fetch-bill">
+                    <button mat-raised-button color="accent" (click)="fetchBill()">
+                        Fetch Bill<mat-icon>done_all</mat-icon>
+                    </button>
+                </div>
+            </span>
+            <button mat-raised-button color="accent" class="col-md-3"
+            (click)="calcTotalPrice()">Proceed to Payments<mat-icon>payment</mat-icon></button>
+        </div>
+</div>

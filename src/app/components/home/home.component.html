@@ -1,0 +1,18 @@
+<!-- <mat-toolbar *ngIf="isLoggedIn"> -->
+<mat-toolbar>
+    <div class="logout">
+      <button mat-raised-button color="danger" (click)="logOut()">
+              <mat-icon>verified_user</mat-icon>
+        LogOut
+    </button>
+    </div>
+    <button mat-button id="home" routerLinkActive="mat-button-active"
+            routerLink="/launch">Home</button>
+
+    <button mat-button id="productdetails" routerLinkActive="mat-button-active"
+            routerLink="/productdetails">Product Gallery</button>
+
+    <button mat-button id="shopping" routerLinkActive="mat-button-active"
+            routerLink="/shopping">Shopping Area</button>
+</mat-toolbar>
+

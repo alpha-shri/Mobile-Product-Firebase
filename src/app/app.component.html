@@ -1,14 +1,23 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Mobile Product Cart</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" routerLink="/newproduct" href="#">Home<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" routerLink="/productdetails" href="#">Features</a>
-    </div>
+<div class="container auth-container pt-3">
+  <div class="sign-up shadow rounded p-4" *ngIf="!isSignedIn">
+    <h4>Sign Up</h4>
+      <input type="email" #emailSignUp class="form-control my-2" placeholder="Enter Email">
+      <input type="text" #passwordSignUp class="form-control my-2" placeholder="Password">
+      <button mat-raised-button color="primary"
+              (click)="onSignUp(emailSignUp.value, passwordSignUp.value)">Sign Up</button>  
   </div>
-</nav>
+  <div class="sign-in shadow rounded p-4" *ngIf="!isLoggedIn">
+    <h4>Log In</h4>
+      <input type="email" #email class="form-control my-2" placeholder="Enter Email">
+      <input type="text" #password class="form-control my-2" placeholder="Password">
+      <button mat-raised-button color="accent"
+              (click)="onSignIn(email.value, password.value)">Log In</button>
+  </div>
+
+</div>
+
+<div class="container" *ngIf="isLoggedIn">
+  <app-home (isLogOut)="handleLogOut()"></app-home>
+</div>
 <router-outlet></router-outlet>
+

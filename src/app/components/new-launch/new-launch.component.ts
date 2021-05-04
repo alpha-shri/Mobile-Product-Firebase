@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Product } from 'src/app/models/Product';
 import { FireBaseService } from 'src/app/services/fire-base.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -10,17 +11,21 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./new-launch.component.scss'],
 })
 export class NewLaunchComponent implements OnInit {
-  productinfo: Product;
-
   rams: Array<number> = [4, 6, 8, 12];
-  loading: boolean = false;
   success: boolean = false;
+  loading: boolean = false; // Flag variable
+  file: File = null; // Variable to store file
+
+  productinfo: Product;
 
   productForm: FormGroup;
 
-  constructor(private _service: ProductService,
-              private _firebaseService: FireBaseService,
-              private fb: FormBuilder) {}
+  constructor(
+    private _service: ProductService,
+    private _firebaseService: FireBaseService,
+    private fb: FormBuilder,
+    private _snackbar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -30,7 +35,13 @@ export class NewLaunchComponent implements OnInit {
       ramTypes: ['', [Validators.required]],
       processor: ['', [Validators.required]],
     });
+
+    this._service
+      .getAllProductsService()
+      .subscribe((data) => (this.productList = data));
   }
+
+  productList: Product[] = [];
   // Getters for form-field
 
   get name() {
@@ -49,32 +60,23 @@ export class NewLaunchComponent implements OnInit {
     return this.productForm.get('processor');
   }
 
-  // addNewProduct() {
-  //   this.loading = true;
-  //   const formValue: Product = this.productForm.value;
-  //   // console.log("Form Details: ", formValue);
-
-  //   try {
-  //     this._service
-  //       .addNewProductService(formValue)
-  //       .subscribe((response) => console.table(response));
-  //   } catch (error) {}
-  // }
-
-  addProductFireBase(){
+  //! Without using Firestore-DB
+  addProductFireBase() {
+    this.loading = true;
     const formValue: Product = this.productForm.value;
+    console.log('Form Details: ', formValue);
 
-    this._firebaseService.addNewProductService(formValue)
-        .then( response => {
-
-        });
-
+    try {
+      this._firebaseService
+        .addNewProductService(formValue)
+        .then((data) => {
+          this._snackbar.open('New mobile added successfully', 'Close');
+          console.log('Completed successfully ...');
+          this.productForm.reset();
+        })
+        .catch((err) => console.warn(`Error ${err}`));
+    } catch (error) {
+      console.error(error);
+    }
   }
-
-  getAllProducts(){
-      this._firebaseService.getAllProductsService()
-  }
-
-
-
 }
